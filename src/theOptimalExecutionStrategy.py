@@ -39,6 +39,8 @@ class OptimalExecution:
         # plt.show()
 
 if __name__ == "__main__":
+    rng = default_rng()
+
     asset = Asset(
         45,
         0.6,
