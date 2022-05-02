@@ -54,7 +54,7 @@ class OptimalExecution:
             np.linspace(0, self.T, self.N + 1), 
             self.liquidation_process
         )
-        plt.show()
+        # plt.show()
 
 class MarketMaking:
     pass
@@ -85,3 +85,4 @@ if __name__ == "__main__":
 
     opt_exec.optimal_trading_curve()
     opt_exec.show()
+    plt.show()
