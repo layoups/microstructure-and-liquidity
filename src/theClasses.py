@@ -61,6 +61,8 @@ class MarketMaking:
 
 if __name__ == "__main__":
 
+
+######################### Optimal Execution #########################
     asset = Asset(
         45,
         0.6,
@@ -74,7 +76,7 @@ if __name__ == "__main__":
         200000
     )
 
-    opt_exec = OptimalExecution(
+    opt_exec_1 = OptimalExecution(
         asset,
         trader,
         1,
@@ -83,6 +85,29 @@ if __name__ == "__main__":
         0.1
     )
 
-    opt_exec.optimal_trading_curve()
-    opt_exec.show()
+    opt_exec_2 = OptimalExecution(
+        asset,
+        Trader(1e-6, 200000),
+        1,
+        0.005,
+        4e6,
+        0.1
+    )
+    opt_exec_3 = OptimalExecution(
+        asset,
+        Trader(5e-6, 200000),
+        1,
+        0.005,
+        4e6,
+        0.1
+    )
+
+    opt_exec_1.optimal_trading_curve()
+    opt_exec_1.show()
+    opt_exec_2.optimal_trading_curve()
+    opt_exec_2.show()
+    opt_exec_3.optimal_trading_curve()
+    opt_exec_3.show()
     plt.show()
+
+########################### Market Making ###########################
