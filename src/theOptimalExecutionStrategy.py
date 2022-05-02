@@ -31,12 +31,12 @@ class OptimalExecution:
             for n in range(self.N + 1)
         ]
 
-    def show(self) -> None:
+    def show_strategy(self) -> None:
         plt.plot(
             np.linspace(0, self.T, self.N + 1), 
             self.liquidation_process
         )
-        # plt.show()
+        # plt.show
 
 if __name__ == "__main__":
     rng = default_rng()
@@ -49,14 +49,9 @@ if __name__ == "__main__":
         rng.standard_normal
     )
 
-    trader = Trader(
-        1e-5,
-        200000
-    )
-
     opt_exec_1 = OptimalExecution(
         asset,
-        trader,
+        Trader(1e-5,200000),
         1,
         0.005,
         4e6,
@@ -81,9 +76,9 @@ if __name__ == "__main__":
     )
 
     opt_exec_1.optimal_trading_curve()
-    opt_exec_1.show()
+    opt_exec_1.show_strategy()
     opt_exec_2.optimal_trading_curve()
-    opt_exec_2.show()
+    opt_exec_2.show_strategy()
     opt_exec_3.optimal_trading_curve()
-    opt_exec_3.show()
+    opt_exec_3.show_strategy()
     plt.show()
