@@ -49,31 +49,38 @@ class OptimalExecution:
             for n in range(self.N + 1)
         ]
 
+    def show(self) -> None:
+        plt.plot(
+            np.linspace(0, self.T, self.N + 1), 
+            self.liquidation_process
+        )
+        plt.show()
 
-asset = Asset(
-    45,
-    0.6,
-    0,
-    0,
-    rng.standard_normal
-)
 
-trader = Trader(
-    1e-5,
-    200000
-)
 
-opt_exec = OptimalExecution(
-    asset,
-    trader,
-    1,
-    0.005,
-    4e6,
-    0.1
-)
+if __name__ == "__main__":
 
-opt_exec.optimal_trading_curve()
-print(opt_exec.liquidation_process[20])
+    asset = Asset(
+        45,
+        0.6,
+        0,
+        0,
+        rng.standard_normal
+    )
 
-# print(asset)
-# print(asset.process())
+    trader = Trader(
+        1e-5,
+        200000
+    )
+
+    opt_exec = OptimalExecution(
+        asset,
+        trader,
+        1,
+        0.005,
+        4e6,
+        0.1
+    )
+
+    opt_exec.optimal_trading_curve()
+    opt_exec.show()
