@@ -1,22 +1,4 @@
-from dataclasses import dataclass, field
-import numpy as np
-from numpy.random import default_rng
-import matplotlib.pyplot as plt
-
-rng = default_rng()
-
-@dataclass
-class Asset:
-    S: float
-    vol: float
-    drift: float
-    market_impact: float
-    process: ...
-
-@dataclass
-class Trader:
-    risk_aversion: float
-    portfolio: int
+from theSetup import *
 
 class OptimalExecution:
 
@@ -56,13 +38,7 @@ class OptimalExecution:
         )
         # plt.show()
 
-class MarketMaking:
-    pass
-
 if __name__ == "__main__":
-
-
-######################### Optimal Execution #########################
     asset = Asset(
         45,
         0.6,
@@ -109,5 +85,3 @@ if __name__ == "__main__":
     opt_exec_3.optimal_trading_curve()
     opt_exec_3.show()
     plt.show()
-
-########################### Market Making ###########################
