@@ -45,7 +45,7 @@ class OptimalExecution:
                 (2 * self.execution_cost)
         )
         self.liquidation_process = [
-            self.trader.portfolio * np.sinh(alpha * (self.T - n*self.dt)) / np.sinh(alpha * self.T)
+            self.trader.portfolio * np.sinh(alpha * (self.T - n * self.dt)) / np.sinh(alpha * self.T)
             for n in range(self.N + 1)
         ]
 
