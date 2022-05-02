@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 import numpy as np
 from numpy.random import default_rng
+import matplotlib.pyplot as plt
 
 rng = default_rng()
 
