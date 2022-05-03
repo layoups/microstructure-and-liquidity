@@ -11,9 +11,11 @@ class Asset:
     vol: float
     drift: float
     market_impact: float
+    liquidity: float
     process: Callable[[], float]
 
 @dataclass
 class Trader:
     risk_aversion: float
     portfolio: float
+    cash_account: float
