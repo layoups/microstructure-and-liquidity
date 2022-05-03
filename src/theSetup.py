@@ -16,4 +16,4 @@ class Asset:
 @dataclass
 class Trader:
     risk_aversion: float
-    portfolio: List[float]
+    portfolio: float
