@@ -78,7 +78,7 @@ class MarketMaking:
             np.linspace(0, self.T, self.N), 
             self.Q
         )
-        plt.xlabel(r'$\delta t$')
+        plt.xlabel(r'$t$')
         plt.ylabel("inventory")
         plt.show()
 
@@ -95,7 +95,7 @@ class MarketMaking:
             np.linspace(0, self.T, self.N), 
             self.S - self.dSb
         )
-        plt.xlabel(r'$\delta t$')
+        plt.xlabel(r'$t$')
         plt.ylabel("S")
         plt.show()
 
@@ -104,7 +104,7 @@ class MarketMaking:
             np.linspace(0, self.T, self.N), 
             self.P
         )
-        plt.xlabel(r'$\delta t$')
+        plt.xlabel(r'$t$')
         plt.ylabel("PnL")
         plt.show()
 
@@ -113,7 +113,7 @@ class MarketMaking:
             np.linspace(0, self.T, self.N), 
             self.X
         )
-        plt.xlabel(r'$\delta t$')
+        plt.xlabel(r'$t$')
         plt.ylabel("cash")
         plt.show()
 
