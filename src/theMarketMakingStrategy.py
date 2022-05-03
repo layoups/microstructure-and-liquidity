@@ -22,10 +22,10 @@ class MarketMaking:
         self.X: List[float] = [trader.cash_account]
         self.P: List[float] = [trader.cash_account + trader.portfolio * asset.S]
         self.S: List[float] = [asset.S]
-        self.dSa: List[float]
-        self.dSb: List[float]
-        self.Na: List[int]
-        self.Nb: List[int]
+        self.dSa: List[float] = []
+        self.dSb: List[float] = []
+        self.Na: List[int] = [0]
+        self.Nb: List[int] = [0]
         self.simulator = simulator
 
     def generate_quotes(self) -> tuple:
@@ -40,7 +40,27 @@ class MarketMaking:
         return temp1, temp2
 
     def make_markets(self) -> None:
-        pass
+        for n in range(1, self.N + 1):
+            quotes = self.generate_quotes()
+            self.dSa[n-1] = quotes[0] + quotes[1]
+            self.dSb[n-1] = quotes[0] - quotes[1]
+
+            prob_a = self.asset.liquidity * np.exp(-self.kappa * self.dSa[n-1]) * self.dt
+            self.Na[n] = self.simulator(prob_a) if self.Q[n-1] > -self.M else 0
+
+            prob_b = self.asset.liquidity * np.exp(-self.kappa * self.dSb[n-1]) * self.dt
+            self.Nb[n] = self.simulator(prob_b) if self.Q[n-1] < self.M else 0
+
+            self.S[n] = self.asset.drift * self.dt \
+                + self.asset.vol * np.sqrt(self.dt) * self.asset.process() \
+                    + self.asset.market_impact * self.Na[n-1] \
+                        - self.asset.market_impact * self.Nb[n-1]
+            self.Q[n] = self.Nb[n] - self.Na[n]
+            self.X[n] = self.X[n-1] \
+                + (self.S[n] + self.dSa[n-1]) * self.Na[n] \
+                    - (self.S[n] - self.dSb[n-1]) * self.Nb[n]
+            self.P[n] = self.X[n] + self.Q[n] * self.S[n]
+
 
 
 
