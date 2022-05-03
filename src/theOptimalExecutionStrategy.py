@@ -47,10 +47,11 @@ if __name__ == "__main__":
         0.6,
         0,
         0,
+        0,
         rng.standard_normal
     )
 
-    trader = Trader(1e-5, 200000)
+    trader = Trader(1e-5, 200000, 0)
 
     opt_exec_1 = OptimalExecution(
         asset,
@@ -62,7 +63,7 @@ if __name__ == "__main__":
     )
     opt_exec_2 = OptimalExecution(
         asset,
-        Trader(1e-6, 200000),
+        Trader(1e-6, 200000, 0),
         1,
         0.005,
         4e6,
@@ -70,7 +71,7 @@ if __name__ == "__main__":
     )
     opt_exec_3 = OptimalExecution(
         asset,
-        Trader(5e-6, 200000),
+        Trader(5e-6, 200000, 0),
         1,
         0.005,
         4e6,

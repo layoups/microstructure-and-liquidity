@@ -28,6 +28,12 @@ class MarketMaking:
         self.Nb: List[int]
         self.simulator = simulator
 
+    def generate_quotes(self) -> tuple:
+        pass
+
+    def make_markets(self) -> None:
+        pass
+
 
 
 
@@ -37,4 +43,3 @@ class MarketMaking:
 if __name__ == "__main__":
     rng = default_rng()
     print(rng.binomial(1, 0.5))
-    pass
