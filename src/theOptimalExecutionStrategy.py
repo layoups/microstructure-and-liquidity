@@ -18,7 +18,7 @@ class OptimalExecution:
         self.T = self.N * self.dt
         self.V = V
         self.execution_cost = execution_cost
-        self.liquidation_process = []
+        # self.liquidation_process = []
 
 
     def optimal_trading_curve(self) -> None:
@@ -26,15 +26,15 @@ class OptimalExecution:
             self.trader.risk_aversion * self.V /\
                 (2 * self.execution_cost)
         )
-        self.liquidation_process = [
-            self.trader.portfolio * np.sinh(alpha * (self.T - n * self.dt)) / np.sinh(alpha * self.T)
+        self.trader.portfolio = [
+            self.trader.portfolio[0] * np.sinh(alpha * (self.T - n * self.dt)) / np.sinh(alpha * self.T)
             for n in range(self.N + 1)
         ]
 
     def show_strategy(self) -> None:
         plt.plot(
             np.linspace(0, self.T, self.N + 1), 
-            self.liquidation_process
+            self.trader.portfolio
         )
         # plt.show
 
@@ -49,18 +49,19 @@ if __name__ == "__main__":
         rng.standard_normal
     )
 
+    trader = Trader(1e-5, [200000])
+
     opt_exec_1 = OptimalExecution(
         asset,
-        Trader(1e-5,200000),
+        trader,
         1,
         0.005,
         4e6,
         0.1
     )
-
     opt_exec_2 = OptimalExecution(
         asset,
-        Trader(1e-6, 200000),
+        Trader(1e-6, [200000]),
         1,
         0.005,
         4e6,
@@ -68,7 +69,7 @@ if __name__ == "__main__":
     )
     opt_exec_3 = OptimalExecution(
         asset,
-        Trader(5e-6, 200000),
+        Trader(5e-6, [200000]),
         1,
         0.005,
         4e6,
@@ -81,4 +82,7 @@ if __name__ == "__main__":
     opt_exec_2.show_strategy()
     opt_exec_3.optimal_trading_curve()
     opt_exec_3.show_strategy()
-    plt.show()
+    # plt.show()
+
+    # print(trader.portfolio[-10:])
+    print(asset.process() * np.sqrt(0.005) * asset.vol)
