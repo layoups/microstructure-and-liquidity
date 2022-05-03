@@ -28,9 +28,9 @@ class MarketMaking:
         self.Nb: List[int] = np.zeros(self.N)
         self.simulator = simulator
 
-    def generate_quotes(self) -> tuple:
+    def generate_quotes(self, n) -> tuple:
         temp1 = (1 / self.trader.risk_aversion) * np.log(1 + (self.trader.risk_aversion / self.kappa)) + self.asset.market_impact / 2
-        temp2 = ((-self.asset.drift / (self.trader.risk_aversion * np.power(self.asset.vol, 2))) + ((2 * self.Q[-1] + 1) * 0.5)) \
+        temp2 = ((-self.asset.drift / (self.trader.risk_aversion * np.power(self.asset.vol, 2))) + ((2 * self.Q[n - 1] + 1) * 0.5)) \
             * np.exp(self.kappa * 0.25 * self.asset.market_impact) \
                 * np.sqrt(
                     ((np.power(self.asset.vol, 2) * self.trader.risk_aversion) / (2 * self.kappa * self.asset.liquidity)) * np.power(
@@ -41,7 +41,7 @@ class MarketMaking:
 
     def make_markets(self) -> None:
         for n in range(1, self.N):
-            quotes = self.generate_quotes()
+            quotes = self.generate_quotes(n)
             self.dSa[n-1] = quotes[0] + quotes[1]
             self.dSb[n-1] = quotes[0] - quotes[1]
 
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     )
 
     market_maker.make_markets()
-    print(market_maker.S)
+    print(market_maker.P[-1])
     # print(np.cumsum(market_maker.Na))
     # print(np.cumsum(market_maker.Nb))
     # print(np.cumsum(market_maker.Nb) - np.cumsum(market_maker.Na))
