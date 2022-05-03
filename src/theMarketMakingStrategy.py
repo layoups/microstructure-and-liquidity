@@ -28,11 +28,11 @@ class MarketMaking:
         self.Nb: List[int] = np.zeros(self.N)
         self.simulator = simulator
 
-    def generate_quotes(self, n) -> tuple:
+    def generate_quotes(self) -> tuple:
         temp1 = (1 / self.trader.risk_aversion) * np.log(1 + (self.trader.risk_aversion / self.kappa)) \
             + self.asset.market_impact / 2
         temp2 = (
-            (-self.asset.drift / (self.trader.risk_aversion * np.power(self.asset.vol, 2))) + ((2 * self.Q[n - 1] + 1) * 0.5)
+            (-self.asset.drift / (self.trader.risk_aversion * np.power(self.asset.vol, 2))) + ((2 * self.trader.portfolio + 1) * 0.5)
         ) * np.exp(
             self.kappa * 0.25 * self.asset.market_impact
         ) * np.sqrt(
@@ -46,7 +46,7 @@ class MarketMaking:
 
     def make_markets(self) -> None:
         for n in range(1, self.N):
-            quotes = self.generate_quotes(n)
+            quotes = self.generate_quotes()
             self.dSa[n-1] = quotes[0] + quotes[1]
             self.dSb[n-1] = quotes[0] - quotes[1]
 
@@ -135,18 +135,18 @@ if __name__ == "__main__":
         rng.binomial
     )
 
-    market_maker.make_markets()
-    market_maker.show_inventory()
-    market_maker.show_asset_price()
-    market_maker.show_pnl()
-    market_maker.show_cash_account()
+    # market_maker.make_markets()
+    # market_maker.show_inventory()
+    # market_maker.show_asset_price()
+    # market_maker.show_pnl()
+    # market_maker.show_cash_account()
 
 
-    # sim_results = []
-    # for i in range(1000):
-    #     market_maker.make_markets()
-    #     sim_results += [market_maker.P[-1]]
+    sim_results = []
+    for i in range(1000):
+        market_maker.make_markets()
+        sim_results += [market_maker.P[-1]]
 
-    # plt.hist(sim_results, bins=40)
-    # plt.show()
+    plt.hist(sim_results, bins=40)
+    plt.show()
     
