@@ -78,6 +78,8 @@ class MarketMaking:
             np.linspace(0, self.T, self.N), 
             self.Q
         )
+        plt.xlabel(r'$\delta t$')
+        plt.ylabel("inventory")
         plt.show()
 
     def show_asset_price(self) -> None:
@@ -93,6 +95,8 @@ class MarketMaking:
             np.linspace(0, self.T, self.N), 
             self.S - self.dSb
         )
+        plt.xlabel(r'$\delta t$')
+        plt.ylabel("S")
         plt.show()
 
     def show_pnl(self) -> None:
@@ -100,6 +104,8 @@ class MarketMaking:
             np.linspace(0, self.T, self.N), 
             self.P
         )
+        plt.xlabel(r'$\delta t$')
+        plt.ylabel("PnL")
         plt.show()
 
     def show_cash_account(self) -> None:
@@ -107,6 +113,8 @@ class MarketMaking:
             np.linspace(0, self.T, self.N), 
             self.X
         )
+        plt.xlabel(r'$\delta t$')
+        plt.ylabel("cash")
         plt.show()
 
 
@@ -118,7 +126,7 @@ if __name__ == "__main__":
         100,
         2,
         0.0,
-        0.0,
+        0.01,
         140,
         rng.standard_normal
     )
@@ -135,18 +143,20 @@ if __name__ == "__main__":
         rng.binomial
     )
 
-    # market_maker.make_markets()
-    # market_maker.show_inventory()
-    # market_maker.show_asset_price()
-    # market_maker.show_pnl()
-    # market_maker.show_cash_account()
+    market_maker.make_markets()
+    market_maker.show_inventory()
+    market_maker.show_asset_price()
+    market_maker.show_pnl()
+    market_maker.show_cash_account()
 
 
-    sim_results = []
-    for i in range(1000):
-        market_maker.make_markets()
-        sim_results += [market_maker.P[-1]]
+    # sim_results = []
+    # for i in range(1000):
+    #     market_maker.make_markets()
+    #     sim_results += [market_maker.P[-1]]
 
-    plt.hist(sim_results, bins=40)
-    plt.show()
+    # plt.hist(sim_results, bins=40)
+    # plt.show()
+
+    # print(np.std(sim_results))
     

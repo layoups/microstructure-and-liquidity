@@ -35,7 +35,8 @@ class OptimalExecution:
     def show_strategy(self) -> None:
         plt.plot(
             np.linspace(0, self.T, self.N + 1), 
-            self.liquidation_process
+            self.liquidation_process,
+            label=r'$ \gamma =$ {}'.format(self.trader.risk_aversion)
         )
         # plt.show
 
@@ -84,6 +85,10 @@ if __name__ == "__main__":
     opt_exec_2.show_strategy()
     opt_exec_3.optimal_trading_curve()
     opt_exec_3.show_strategy()
+
+    plt.legend(bbox_to_anchor=(1, 1), loc=1, borderaxespad=0.)
+    plt.xlabel(r'$\delta t$')
+    plt.ylabel("portfolio")
     plt.show()
 
     # print(asset.process() * np.sqrt(0.005) * asset.vol)
