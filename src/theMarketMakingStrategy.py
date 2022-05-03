@@ -124,9 +124,9 @@ if __name__ == "__main__":
 
     asset = Asset(
         100,
-        2,
+        0.6,
         0.0,
-        0.01,
+        0.0,
         140,
         rng.standard_normal
     )
@@ -139,7 +139,7 @@ if __name__ == "__main__":
         1.5,
         1,
         0.005,
-        5,
+        10,
         rng.binomial
     )
 
