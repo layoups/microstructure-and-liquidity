@@ -29,14 +29,19 @@ class MarketMaking:
         self.simulator = simulator
 
     def generate_quotes(self, n) -> tuple:
-        temp1 = (1 / self.trader.risk_aversion) * np.log(1 + (self.trader.risk_aversion / self.kappa)) + self.asset.market_impact / 2
-        temp2 = ((-self.asset.drift / (self.trader.risk_aversion * np.power(self.asset.vol, 2))) + ((2 * self.Q[n - 1] + 1) * 0.5)) \
-            * np.exp(self.kappa * 0.25 * self.asset.market_impact) \
-                * np.sqrt(
-                    ((np.power(self.asset.vol, 2) * self.trader.risk_aversion) / (2 * self.kappa * self.asset.liquidity)) * np.power(
-                        1 + (self.trader.risk_aversion / self.kappa), 1 + (self.kappa / self.trader.risk_aversion)
-                    )
-                )
+        temp1 = (1 / self.trader.risk_aversion) * np.log(1 + (self.trader.risk_aversion / self.kappa)) \
+            + self.asset.market_impact / 2
+        temp2 = (
+            (-self.asset.drift / (self.trader.risk_aversion * np.power(self.asset.vol, 2))) + ((2 * self.Q[n - 1] + 1) * 0.5)
+        ) * np.exp(
+            self.kappa * 0.25 * self.asset.market_impact
+        ) * np.sqrt(
+            (
+                (np.power(self.asset.vol, 2) * self.trader.risk_aversion) / (2 * self.kappa * self.asset.liquidity)
+            ) * np.power(
+                1 + (self.trader.risk_aversion / self.kappa), 1 + (self.kappa / self.trader.risk_aversion)
+            )
+        )
         return temp1, temp2
 
     def make_markets(self) -> None:
@@ -107,9 +112,9 @@ if __name__ == "__main__":
 
     asset = Asset(
         100,
-        0.2,
+        0.6,
+        0.00,
         0.0,
-        0,
         140,
         rng.standard_normal
     )
@@ -122,7 +127,7 @@ if __name__ == "__main__":
         1.5,
         1,
         0.005,
-        10,
+        5,
         rng.binomial
     )
 
