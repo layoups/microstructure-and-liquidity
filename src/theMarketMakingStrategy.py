@@ -29,7 +29,15 @@ class MarketMaking:
         self.simulator = simulator
 
     def generate_quotes(self) -> tuple:
-        pass
+        temp1 = (1 / self.trader.risk_aversion) * np.log(1 + (self.trader.risk_aversion / self.kappa)) + self.asset.market_impact / 2
+        temp2 = ((-self.asset.drift / (self.trader.risk_aversion * np.power(self.asset.vol, 2))) + ((2 * self.Q[-1] + 1) * 0.5)) \
+            * np.exp(self.kappa * 0.25 * self.asset.market_impact) \
+                * np.sqrt(
+                    ((np.power(self.asset.vol, 2) * self.trader.risk_aversion) / (2 * self.kappa * self.asset.liquidity)) * np.power(
+                        1 + (self.trader.risk_aversion / self.kappa), 1 + (self.kappa / self.trader.risk_aversion)
+                    )
+                )
+        return temp1, temp2
 
     def make_markets(self) -> None:
         pass
