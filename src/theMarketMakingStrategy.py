@@ -64,6 +64,42 @@ class MarketMaking:
                     - (self.S[n] - self.dSb[n-1]) * Nb
             self.P[n] = self.X[n] + self.Q[n] * self.S[n]
 
+    def show_inventory(self) -> None:
+        plt.plot(
+            np.linspace(0, self.T, self.N), 
+            self.Q
+        )
+        plt.show()
+
+    def show_asset_price(self) -> None:
+        plt.plot(
+            np.linspace(0, self.T, self.N), 
+            self.S
+        )
+        plt.plot(
+            np.linspace(0, self.T, self.N), 
+            self.dSa + self.S
+        )
+        plt.plot(
+            np.linspace(0, self.T, self.N), 
+            self.S - self.dSb
+        )
+        plt.show()
+
+    def show_pnl(self) -> None:
+        plt.plot(
+            np.linspace(0, self.T, self.N), 
+            self.P
+        )
+        plt.show()
+
+    def show_cash_account(self) -> None:
+        plt.plot(
+            np.linspace(0, self.T, self.N), 
+            self.X
+        )
+        plt.show()
+
 
 
 
@@ -77,7 +113,7 @@ if __name__ == "__main__":
     asset = Asset(
         100,
         0.2,
-        0.1,
+        0.0,
         0,
         140,
         rng.standard_normal
@@ -97,6 +133,9 @@ if __name__ == "__main__":
 
     market_maker.make_markets()
     print(market_maker.P[-1])
-    # print(np.cumsum(market_maker.Na))
-    # print(np.cumsum(market_maker.Nb))
-    # print(np.cumsum(market_maker.Nb) - np.cumsum(market_maker.Na))
+
+
+    market_maker.show_inventory()
+    market_maker.show_asset_price()
+    market_maker.show_pnl()
+    market_maker.show_cash_account()
