@@ -91,5 +91,3 @@ if __name__ == "__main__":
     plt.ylabel("portfolio")
     plt.title('Optimal Trading Curve: \n' + r'$q_0 = 200000,\ T = 1,\ S_0 = 45,\ \sigma = 0.6,\ V = 4 \cdot 10^6,\ \eta = 0.1$')
     plt.show()
-
-    # print(asset.process() * np.sqrt(0.005) * asset.vol)
