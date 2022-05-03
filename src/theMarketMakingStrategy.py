@@ -143,20 +143,21 @@ if __name__ == "__main__":
         rng.binomial
     )
 
-    market_maker.make_markets()
-    market_maker.show_inventory()
-    market_maker.show_asset_price()
-    market_maker.show_pnl()
-    market_maker.show_cash_account()
+    # market_maker.make_markets()
+    # market_maker.show_inventory()
+    # market_maker.show_asset_price()
+    # market_maker.show_pnl()
+    # market_maker.show_cash_account()
 
 
-    # sim_results = []
-    # for i in range(1000):
-    #     market_maker.make_markets()
-    #     sim_results += [market_maker.P[-1]]
+    sim_results = []
+    for i in range(1000):
+        market_maker.make_markets()
+        sim_results += [market_maker.P[-1]]
 
-    # plt.hist(sim_results, bins=40)
-    # plt.show()
+    plt.hist(sim_results, bins=40)
+    plt.xlabel("PnL")
+    plt.show()
 
     # print(np.std(sim_results))
     
