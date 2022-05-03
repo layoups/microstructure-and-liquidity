@@ -69,6 +69,10 @@ class MarketMaking:
                     - (self.S[n] - self.dSb[n-1]) * Nb
             self.P[n] = self.X[n] + self.Q[n] * self.S[n]
 
+            self.asset.S = self.S[n]
+            self.trader.cash_account = self.X[n]
+            self.trader.portfolio = self.Q[n]
+
     def show_inventory(self) -> None:
         plt.plot(
             np.linspace(0, self.T, self.N), 
@@ -112,8 +116,8 @@ if __name__ == "__main__":
 
     asset = Asset(
         100,
-        0.6,
-        0.00,
+        2,
+        0.0,
         0.0,
         140,
         rng.standard_normal
@@ -132,10 +136,17 @@ if __name__ == "__main__":
     )
 
     market_maker.make_markets()
-    print(market_maker.P[-1])
-
-
     market_maker.show_inventory()
     market_maker.show_asset_price()
     market_maker.show_pnl()
     market_maker.show_cash_account()
+
+
+    # sim_results = []
+    # for i in range(1000):
+    #     market_maker.make_markets()
+    #     sim_results += [market_maker.P[-1]]
+
+    # plt.hist(sim_results, bins=40)
+    # plt.show()
+    
